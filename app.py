@@ -5,24 +5,26 @@ import re
 import os
 from dotenv import load_dotenv
 
-
+# Load environmental variables from .env file
 app = Flask(__name__)
 
 # Configuration for Open WebUI
 WEBUI_URL: str = os.getenv('WEBUI_URL', 'http://localhost:3000/api/chat/completions')
-OLLAMA_MODEL: str = os.getenv('OLLAMA_MODEL', 'gpt-oss:20b')
-WEBUI_API_KEY: str = os.getenv('WEBUI_API_KEY', '')
+OLLAMA_MODEL: str = os.getenv('OLLAMA_MODEL', 'gpt-oss:20b') # Default Ollama model
+WEBUI_API_KEY: str = os.getenv('WEBUI_API_KEY', '') # API key for Webui, if needed
 
 # Basic Tic-Tac-Toe board (3x3)
-board = [['', '', ''], ['', '', ''], ['', '', '']]
-current_player = 'X'
+board = [['', '', ''], ['', '', ''], ['', '', '']] # 3 x 3 Tic-Tac-Toe board
+current_player = 'X' # Tracks the current player, starts with 'x'
 
 @app.route('/')
 def index():
+    # Renders the main Tic-Tac-Toe game page
     return render_template('index.html')
 
 @app.route('/reset', methods=['POST'])
 def reset_game():
+    # Resets the game board and current player
     global board, current_player
     board = [['', '', ''], ['', '', ''], ['', '', '']]
     current_player = 'X'
@@ -30,22 +32,31 @@ def reset_game():
 
 @app.route('/make_move', methods=['POST'])
 def make_move():
+    """
+    Handles a player's move.
+    
+    Receives row and column from the frontend, updates the board,
+    checks for a winner or draw, and switches the current player.
+    """
     global board, current_player
     data = request.get_json()
     row = data['row']
     col = data['col']
 
+    # Checks if the chosen cell is empty
     if board[row][col] == '':
-        board[row][col] = current_player
-        winner = check_winner()
+        board[row][col] = current_player # Place the current player's mark
+        winner = check_winner() # Checks if the move results in a win
         if winner:
             return jsonify(success=True, board=board, winner=winner, currentPlayer=current_player)
-        elif is_board_full():
+        elif is_board_full(): # Check for a draw if no winner
             return jsonify(success=True, board=board, winner='draw', currentPlayer=current_player)
         else:
+            # Switch to the next player
             current_player = 'O' if current_player == 'X' else 'X'
             return jsonify(success=True, board=board, currentPlayer=current_player)
     else:
+        # Invalid move, cell is already taken
         return jsonify(success=False, message="Invalid move, cell already taken.")
 
 def check_winner():
@@ -65,6 +76,11 @@ def check_winner():
     return None
 
 def is_board_full():
+    """
+    Checks if the current global board is completely filled.
+    
+    Returns True if full, False otherwise.
+    """
     for row in board:
         for cell in row:
             if cell == '':
@@ -76,10 +92,11 @@ def is_board_full():
 def computer_move_api():
     global board, current_player
     data = request.get_json()
-    player_to_move = data.get('player', current_player)
-    auto_play_mode = data.get('auto_play', False)
+    player_to_move = data.get('player', current_player) # Determine which player the AI is
+    auto_play_mode = data.get('auto_play', False) # True if in AI vs AI auto-play mode
     ai_type = data.get('ai_type', 'minimax')  # 'minimax' or 'ollama'
 
+    # Proceed only if the board is not full and there's no winner yet
     if not is_board_full() and not check_winner():
         if ai_type == 'ollama':
             best_move = get_ollama_move(board, player_to_move)

@@ -4,33 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe with AI</title>
+    <!-- Link to the CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Tic-Tac-Toe</h1>
         
+        <!-- Player choice section - shown at start, hidden during game -->
         <div id="player-choice-container">
             <p>Choose game mode:</p>
             
             <h3>Human vs AI</h3>
+            <!-- Buttons to start Human vs Minimax AI -->
             <button onclick="setPlayers(1, 'minimax', 'minimax')">Play vs Minimax AI</button>
+            <!-- Buttons to start Human vs Ollama AI -->
             <button onclick="setPlayers(1, 'minimax', 'ollama')">Play vs Ollama AI</button>
             
             <h3>Human vs Human</h3>
             <button onclick="setPlayers(2)">2 Players</button>
             
             <h3>AI vs AI (Watch them play)</h3>
+            <!-- Buttons to start various AI vs AI matchups -->
             <button onclick="setPlayers(0, 'minimax', 'minimax')">Minimax vs Minimax</button>
             <button onclick="setPlayers(0, 'ollama', 'minimax')">Ollama vs Minimax</button>
             <button onclick="setPlayers(0, 'ollama', 'ollama')">Ollama vs Ollama</button>
         </div>
 
+        <!-- Game container section - hidden at start, shown during game -->
         <div id="game-container" style="display: none;">
+            <!-- Scoreboard will be inserted here by JavaScript -->
             <div id="scoreboard"></div>
             
+            <!-- Game status display -->
             <div id="status"></div>
+            <!-- Tic-Tac-Toe board grid -->
             <div id="board" class="board">
+                <!-- Individual cells with data attributes for row/column -->
                 <div class="cell" data-row="0" data-col="0"></div>
                 <div class="cell" data-row="0" data-col="1"></div>
                 <div class="cell" data-row="0" data-col="2"></div>
@@ -42,6 +52,7 @@
                 <div class="cell" data-row="2" data-col="2"></div>
             </div>
             
+            <!-- Container for game control buttons -->
             <div class="button-container">
                 <button id="reset-button" style="display: none;">Play Again</button>
                 <button id="main-menu-button" style="display: none;">Main Menu</button>
@@ -49,7 +60,7 @@
         </div>
     </div>
 
-
+    <!-- Link to the JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

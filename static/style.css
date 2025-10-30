@@ -1,173 +1,200 @@
+/* General body styling */
 body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+    font-family: Arial, sans-serif;
+    display: flex; /* Use flexbox for centering content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    margin: 0; /* Remove default body margin */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+}
 
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 500px;
-        }
+/* Container for the game elements */
+.container {
+    background-color: #fff; /* White background */
+    padding: 30px; /* Internal spacing */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    text-align: center; /* Center text content */
+    max-width: 500px; /* Limit container width */
+}
 
-        h1 {
-            color: #667eea;
-            margin-bottom: 20px;
-        }
+/* Main heading style */
+h1 {
+    color: #667eea; /* Primary color for heading */
+    margin-bottom: 20px; /* Space below heading */
+}
 
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
-            gap: 5px;
-            margin: 20px auto;
-            width: 315px;
-            border: 2px solid #333;
-        }
+/* Tic-Tac-Toe board grid */
+.board {
+    display: grid; /* Use CSS Grid for board layout */
+    grid-template-columns: repeat(3, 100px); /* 3 columns, each 100px wide */
+    grid-template-rows: repeat(3, 100px); /* 3 rows, each 100px high */
+    gap: 5px; /* Space between cells */
+    margin: 20px auto; /* Center board horizontally and add vertical margin */
+    width: 315px; /* Total width: 3*100px + 2*5px = 310px; adjusted for border */
+    border: 2px solid #333; /* Border around the entire board */
+}
 
-        .cell {
-            width: 100px;
-            height: 100px;
-            background-color: #eee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+/* Individual cell styling */
+.cell {
+    width: 100px; /* Explicit width */
+    height: 100px; /* Explicit height */
+    background-color: #eee; /* Light grey background */
+    display: flex; /* Flexbox for centering 'X' or 'O' */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    font-size: 2em; /* Large font size for X/O */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Indicate clickable element */
+    transition: background-color 0.2s; /* Smooth hover effect */
+}
 
-        .cell:hover {
-            background-color: #ddd;
-        }
+/* Hover effect for cells */
+.cell:hover {
+    background-color: #ddd; /* Darker background on hover */
+}
 
-        .cell.X {
-            color: #e74c3c;
-        }
+/* Styling for 'X' mark */
+.cell.X {
+    color: #e74c3c; /* Red color for X */
+}
 
-        .cell.O {
-            color: #3498db;
-        }
+/* Styling for 'O' mark */
+.cell.O {
+    color: #3498db; /* Blue color for O */
+}
 
-        #status {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            font-weight: bold;
-            min-height: 30px;
-            color: #333;
-        }
+/* Game status message display */
+#status {
+    font-size: 1.2em; /* Larger font size */
+    margin-bottom: 15px; /* Space below status */
+    font-weight: bold; /* Bold text */
+    min-height: 30px; /* Ensure consistent height */
+    color: #333; /* Dark grey text color */
+}
 
-        #scoreboard {
-            display: none;
-            justify-content: space-around;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            gap: 20px;
-        }
+/* Scoreboard display */
+#scoreboard {
+    display: none; /* Hidden by default, shown when game starts */
+    justify-content: space-around; /* Distribute items evenly */
+    align-items: center; /* Align items vertically */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Internal spacing */
+    margin-bottom: 20px; /* Space below scoreboard */
+    gap: 20px; /* Space between score items */
+}
 
-        .score-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
+/* Individual score item (e.g., X score, O score, Draws) */
+.score-item {
+    display: flex; /* Flexbox for vertical layout of label and value */
+    flex-direction: column; /* Stack label and value vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 5px; /* Space between label and value */
+}
 
-        .score-label {
-            font-size: 0.9em;
-            color: #ffffff;
-            font-weight: 600;
-        }
+/* Score label (e.g., "You (X)", "AI (O)", "Draws") */
+.score-label {
+    font-size: 0.9em; /* Smaller font size */
+    color: #ffffff; /* White text */
+    font-weight: 600; /* Semi-bold */
+}
 
-        .score-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #ffffff;
-        }
+/* Score value (e.g., the number of wins) */
+.score-value {
+    font-size: 1.8em; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    color: #ffffff; /* White text */
+}
 
-        button {
-            padding: 12px 24px;
-            font-size: 1em;
-            margin: 5px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            transition: all 0.3s;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+/* General button styling */
+button {
+    padding: 12px 24px; /* Internal spacing */
+    font-size: 1em; /* Standard font size */
+    margin: 5px; /* Margin around buttons */
+    cursor: pointer; /* Indicate clickable element */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    color: white; /* White text color */
+    transition: all 0.3s; /* Smooth transitions for hover/active states */
+    font-weight: 600; /* Semi-bold text */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
+/* Hover effect for buttons */
+button:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+}
 
-        button:active {
-            transform: translateY(0);
-        }
+/* Active effect for buttons (when clicked) */
+button:active {
+    transform: translateY(0); /* Return to original position */
+}
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
+/* Container for multiple buttons */
+.button-container {
+    display: flex; /* Flexbox for button layout */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px; /* Space above button container */
+    flex-wrap: wrap; /* Allow buttons to wrap to next line on smaller screens */
+}
 
-        #player-choice-container button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+/* Styles specific to player choice buttons */
+#player-choice-container button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+}
 
-        #player-choice-container h3 {
-            color: #667eea;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
+/* Heading within player choice container */
+#player-choice-container h3 {
+    color: #667eea; /* Primary color for heading */
+    margin-top: 20px; /* Space above heading */
+    margin-bottom: 10px; /* Space below heading */
+}
 
-        #player-choice-container p {
-            font-size: 1.1em;
-            color: #666;
-            margin-bottom: 10px;
-        }
+/* Paragraph text within player choice container */
+#player-choice-container p {
+    font-size: 1.1em; /* Slightly larger font size */
+    color: #666; /* Dark grey text color */
+    margin-bottom: 10px; /* Space below paragraph */
+}
 
-        #main-menu-button {
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-        }
+/* Style for the 'Main Menu' button */
+#main-menu-button {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%); /* Grey gradient background */
+}
 
-        #reset-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+/* Style for the 'Reset' button */
+#reset-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Primary gradient background */
+}
 
-        body.flash {
-            background-color: #ff0000;
-        }
+/* Flash effect for the body during automated AI moves */
+body.flash {
+    background-color: #ff0000; /* Red background to indicate a move */
+}
 
-        @media (max-width: 400px) {
-            .board {
-                grid-template-columns: repeat(3, 80px);
-                grid-template-rows: repeat(3, 80px);
-                width: 255px;
-            }
-            
-            .cell {
-                width: 80px;
-                height: 80px;
-                font-size: 1.5em;
-            }
-            
-            #scoreboard {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+/* Responsive adjustments for smaller screens */
+@media (max-width: 400px) {
+    /* Adjust board size */
+    .board {
+        grid-template-columns: repeat(3, 80px); /* Smaller columns */
+        grid-template-rows: repeat(3, 80px); /* Smaller rows */
+        width: 255px; /* Adjusted board width */
+    }
+    
+    /* Adjust cell size and font */
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5em;
+    }
+    
+    /* Stack scoreboard items vertically */
+    #scoreboard {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
